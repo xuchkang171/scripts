@@ -43,4 +43,4 @@ sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
 echo "Make node_exporter start on boot ... done"
 
-echo "\n👌"
+echo "👌"
