@@ -1,6 +1,5 @@
-# What
-##  node_exporter-1.0.1-installer.sh
-Install node_exporter and start it on boot
+# node_exporter-1.0.1-installer.sh
+Install node_exporter and start it on boot.
 1. get node_exporter-1.0.1 to /usr/local/bin/node_exporter
 2. sudo useradd -rs /bin/false node_exporter
 3. make node_exporter start on boot with systemd unit
