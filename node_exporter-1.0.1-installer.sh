@@ -44,9 +44,9 @@ echo "Writing: /etc/systemd/system/node_exporter.service ... done"
 
 # 4
 echo "Make node_exporter start on boot ..."
-sudo systemctl daemon-reload
-sudo systemctl enable node_exporter
-sudo systemctl start node_exporter
+systemctl daemon-reload
+systemctl enable node_exporter
+systemctl start node_exporter
 echo "Make node_exporter start on boot ... done"
 
 echo "👌"
