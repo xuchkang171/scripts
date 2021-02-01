@@ -10,17 +10,17 @@
 echo "Downloading node_exporter-1.0.1 ..."
 wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
 tar -xf node_exporter-1.0.1.linux-amd64.tar.gz
-sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
+mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
 rm -r node_exporter-1.0.1.linux-amd64*
 echo "Downloading node_exporter-1.0.1 to /usr/local/bin ... done"
 
 # 2
-sudo useradd -rs /bin/false node_exporter
+useradd -rs /bin/false node_exporter
 echo "useradd node_exporter ... done"
 
 # 3
 echo "Writing: /etc/systemd/system/node_exporter.service ..."
-sudo bash -c "cat > /etc/systemd/system/node_exporter.service" << EOL
+bash -c "cat > /etc/systemd/system/node_exporter.service" << EOL
 [Unit]
 Description=Node Exporter
 After=network.target
