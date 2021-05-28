@@ -52,7 +52,7 @@ echo "$ss_config_path:"
 cat $ss_config_path
 echo ""
 echo "[Proxy] // in Surge"
-echo "Proxy SS+UDP = ss, $(curl ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
+echo "SS+UDP = ss, $(curl ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
 
 if [ -f "$iptables" ]; then
   rm -rf $iptables
