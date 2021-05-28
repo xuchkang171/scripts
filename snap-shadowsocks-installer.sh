@@ -14,6 +14,8 @@ ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.
 ss_server_port=$(shuf -i 1024-65535 -n 1)
 ss_password=$(openssl rand -base64 32)
 f
+iptables=/etc/iptables
+
 # 1 preparation
 sudo apt update
 sudo apt install snapd
@@ -52,4 +54,10 @@ echo ""
 echo "[Proxy] // in Surge"
 echo "Proxy SS+UDP = ss, $(curl ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
 
-echo "👌"
+if [ -f "$iptables" ]; then
+  rm -rf $iptables
+  echo "Reboot is needed, which may takes 1 minute or 2. Try using ss after that."
+  reboot
+else 
+  echo -e "\n👌"
+fi
