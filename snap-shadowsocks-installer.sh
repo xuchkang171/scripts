@@ -10,7 +10,6 @@ if [ `whoami` != 'root' ]
 fi
 
 # 0 variables
-
 ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json"
 ss_server_port=$(shuf -i 1024-65535 -n 1)
 ss_password=$(openssl rand -base64 32)
@@ -24,7 +23,6 @@ sudo snap install core
 sudo snap install shadowsocks-libev --edge
 
 # 3 ss > config
-
 bash -c "cat > $ss_config_path" << EOL
 {
     "server":["::0","0.0.0.0"],
