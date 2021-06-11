@@ -26,15 +26,15 @@ sudo snap install core
 sudo snap install shadowsocks-libev --edge
 
 # 3 ss > config
-bash -c "cat > $ss_config_path" << EOL
+bash -c "cat > $ss_config_path" << EOF
 {
     "server":["::0","0.0.0.0"],
-    "server_port":\$ss_server_port,
+    "server_port":$ss_server_port,
     "encryption_method":"chacha20-ietf-poly1305",
-    "password":"\$ss_password",
+    "password":"$ss_password",
     "fast_open":false
 }
-EOL
+EOF
 
 # 4 set up firewall
 sudo apt update && sudo apt install -y ufw
