@@ -22,6 +22,10 @@ sudo apt update
 sudo apt install snapd
 sudo snap install core
 
+# stop and disable ss if running
+systemctl stop snap.shadowsocks-libev.ss-server-daemon.service
+systemctl disable snap.shadowsocks-libev.ss-server-daemon.service
+
 # 2 ss > download 
 sudo snap install shadowsocks-libev --edge
 
