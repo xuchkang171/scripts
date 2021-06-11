@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Purpose: Install shadowsocks-libev and start it on boot
 # Author: Frank
+#
+# Usage:
+# curl -O https://raw.githubusercontent.com/xuchkang171/scripts/main/shadowsocks-installer.sh && chmod +x shadowsocks-installer.sh && ./shadowsocks-installer.sh
 # --------------------------------------
 
 if [ "$(whoami)" != 'root' ]
