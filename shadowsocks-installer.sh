@@ -53,10 +53,11 @@ sudo systemctl start snap.shadowsocks-libev.ss-server-daemon.service
 sudo systemctl enable snap.shadowsocks-libev.ss-server-daemon.service
 
 # 6 ss > show config
-echo "$ss_config_path:"
+echo ""
+echo "config.json ($ss_config_path):"
 cat $ss_config_path
 echo ""
-echo "[Proxy] // in Surge"
-echo "SS+UDP = ss, $(curl ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
-
+echo "[Proxy] in Surge"
+echo "SS+UDP = ss, $(curl -4 ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
 echo -e "\n👌"
+systemctl status snap.shadowsocks-libev.ss-server-daemon.service
