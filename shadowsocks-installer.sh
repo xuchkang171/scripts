@@ -28,7 +28,7 @@ sudo snap install shadowsocks-libev --edge
 # 3 ss > config
 bash -c "cat > $ss_config_path" << EOF
 {
-    "server":["::0","0.0.0.0"],
+    "server":["0.0.0.0"],
     "server_port":$ss_server_port,
     "encryption_method":"chacha20-ietf-poly1305",
     "password":"$ss_password",
