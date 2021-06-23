@@ -6,6 +6,31 @@
 # curl -O https://raw.githubusercontent.com/xuchkang171/scripts/main/shadowsocks-installer.sh && chmod +x shadowsocks-installer.sh && ./shadowsocks-installer.sh
 # --------------------------------------
 
+urlencode() {
+    # urlencode <string>
+
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:$i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf '%s' "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+
+    LC_COLLATE=$old_lc_collate
+}
+
+urldecode() {
+    # urldecode <string>
+
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\\x}"
+}
+
 if [ "$(whoami)" != 'root' ]
   then
     echo "You must be root to run this script."
@@ -70,34 +95,10 @@ echo ""
 # URI Format:
 #   ss://method:password@hostname:port
 URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64)
-echo "${URI}#${(urlencode($ss_name) | base64)}"
+echo -e "${URI}#\c"
+urlencode "$ss_name" | base64
 echo ""
 
 echo "👌"
 echo ""
 systemctl status snap.shadowsocks-libev.ss-server-daemon.service
-
-urlencode() {
-    # urlencode <string>
-
-    old_lc_collate=$LC_COLLATE
-    LC_COLLATE=C
-
-    local length="${#1}"
-    for (( i = 0; i < length; i++ )); do
-        local c="${1:$i:1}"
-        case $c in
-            [a-zA-Z0-9.~_-]) printf '%s' "$c" ;;
-            *) printf '%%%02X' "'$c" ;;
-        esac
-    done
-
-    LC_COLLATE=$old_lc_collate
-}
-
-urldecode() {
-    # urldecode <string>
-
-    local url_encoded="${1//+/ }"
-    printf '%b' "${url_encoded//%/\\x}"
-}
