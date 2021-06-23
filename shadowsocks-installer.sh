@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Purpose: Install shadowsocks-libev and start it on boot
 # Author: Frank
 #
