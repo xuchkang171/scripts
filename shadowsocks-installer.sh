@@ -58,7 +58,7 @@ systemctl disable snap.shadowsocks-libev.ss-server-daemon.service
 sudo snap install shadowsocks-libev --edge
 
 # 3 ss > config
-sleep 2
+sleep 5
 bash -c "cat > $ss_config_path" << EOF
 {
     "server":["0.0.0.0"],
@@ -102,6 +102,7 @@ echo -e "${URI}#\c"
 urlencode "$ss_name" | base64
 echo ""
 
+sleep 5
 echo "👌"
 echo ""
 systemctl status snap.shadowsocks-libev.ss-server-daemon.service
