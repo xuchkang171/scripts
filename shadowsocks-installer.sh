@@ -76,6 +76,7 @@ sudo ufw allow ssh
 sudo ufw allow "$ss_server_port"/tcp
 sudo ufw allow "$ss_server_port"/udp
 yes | sudo ufw enable
+sleep 5
 ufw status
 
 # 5 start and turn on start on boot
