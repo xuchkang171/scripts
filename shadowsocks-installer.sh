@@ -47,7 +47,7 @@ ss_name="SS+UDP"
 
 # 1 preparation
 sudo apt update
-sudo apt install snapd
+sudo apt install -y snapd
 sudo snap install core
 
 # stop and disable ss if running
