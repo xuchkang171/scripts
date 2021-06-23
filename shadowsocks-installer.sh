@@ -76,6 +76,7 @@ sudo ufw allow ssh
 sudo ufw allow "$ss_server_port"/tcp
 sudo ufw allow "$ss_server_port"/udp
 yes | sudo ufw enable
+ufw status
 
 # 5 start and turn on start on boot
 sudo systemctl start snap.shadowsocks-libev.ss-server-daemon.service
