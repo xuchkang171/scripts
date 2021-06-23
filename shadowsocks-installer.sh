@@ -69,7 +69,7 @@ bash -c "cat > $ss_config_path" << EOF
 EOF
 
 # 4 set up firewall
-sudo apt update && sudo apt install -y ufw
+sudo apt install -y ufw
 yes | sudo ufw reset
 sudo ufw allow ssh
 sudo ufw allow "$ss_server_port"/tcp
