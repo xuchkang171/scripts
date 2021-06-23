@@ -13,9 +13,12 @@ if [ "$(whoami)" != 'root' ]
 fi
 
 # 0 variables
+ip=$(curl -4 ip.sb -s)
 ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json"
 ss_server_port=$(shuf -i 1024-65535 -n 1)
 ss_password=$(openssl rand -base64 32)
+ss_encryption="chacha20-ietf-poly1305"
+ss_name="SS+UDP"
 
 # 1 preparation
 sudo apt update
@@ -34,7 +37,7 @@ bash -c "cat > $ss_config_path" << EOF
 {
     "server":["0.0.0.0"],
     "server_port":$ss_server_port,
-    "encryption_method":"chacha20-ietf-poly1305",
+    "encryption_method":$ss_encryption,
     "password":"$ss_password",
     "fast_open":false
 }
@@ -52,12 +55,49 @@ yes | sudo ufw enable
 sudo systemctl start snap.shadowsocks-libev.ss-server-daemon.service
 sudo systemctl enable snap.shadowsocks-libev.ss-server-daemon.service
 
-# 6 ss > show config
+# 6 ss > show config in json
 echo ""
 echo "config.json ($ss_config_path):"
 cat $ss_config_path
 echo ""
+
+# 6 ss > show config in Surge
 echo "[Proxy] in Surge"
-echo "SS+UDP = ss, $(curl -4 ip.sb -s), $ss_server_port, encrypt-method=chacha20-ietf-poly1305, password=$ss_password, udp-relay=true"
-echo -e "\n👌"
+echo "$ss_name = ss, $ip, $ss_server_port, encrypt-method=$ss_encryption, password=$ss_password, udp-relay=true"
+echo ""
+
+# 6 ss > show config in URI
+# URI Format:
+#   ss://method:password@hostname:port
+URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64)
+echo "${URI}#${(urlencode($ss_name) | base64)}"
+echo ""
+
+echo "👌"
+echo ""
 systemctl status snap.shadowsocks-libev.ss-server-daemon.service
+
+urlencode() {
+    # urlencode <string>
+
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:$i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf '%s' "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+
+    LC_COLLATE=$old_lc_collate
+}
+
+urldecode() {
+    # urldecode <string>
+
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\\x}"
+}
