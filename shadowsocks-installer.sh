@@ -38,6 +38,8 @@ if [ "$(whoami)" != 'root' ]
 fi
 
 # 0 variables
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
 ip=$(curl -4 ip.sb -s)
 ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json"
 ss_server_port=$(shuf -i 1024-65535 -n 1)
@@ -83,24 +85,25 @@ sudo systemctl enable snap.shadowsocks-libev.ss-server-daemon.service
 
 # 6 ss > show config in json
 echo ""
-echo "config.json ($ss_config_path):"
+echo -e "config.${GREEN}json${NC} ($ss_config_path):"
 cat $ss_config_path
 echo ""
 
 # 6 ss > show config in URI
 # URI Format:
 #   ss://method:password@hostname:port
+echo -e "${GREEN}URI${NC} Scheme:"
 URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64 -w 0)
 echo "${URI}#$(urlencode "$ss_name")"
 echo ""
 
 # 6 ss > show config in Surge
-echo "[Proxy] in Surge"
+echo -e "[Proxy] in ${GREEN}Surge${NC}:"
 echo "$ss_name = ss, $ip, $ss_server_port, encrypt-method=$ss_encryption, password=$ss_password, udp-relay=true"
 echo ""
 
 # 6 ss > show config for Clash
-echo "Clash Subscription Link:"
+echo -e "${GREEN}Clash${NC} Subscription Link:"
 echo "https://sub.id9.cc/sub?target=clash&url=$(urlencode "$URI")&insert=false&config=%E5%93%81%E4%BA%91%E4%B8%93%E5%B1%9E%E9%85%8D%E7%BD%AE&emoji=true&list=false&udp=true&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
 echo ""
 
