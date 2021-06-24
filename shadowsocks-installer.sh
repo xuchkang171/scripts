@@ -94,7 +94,8 @@ echo ""
 #   ss://method:password@hostname:port
 echo -e "${GREEN}URI${NC} Scheme:"
 URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64 -w 0)
-echo "${URI}#$(urlencode "$ss_name")"
+URI="${URI}#$(urlencode "$ss_name")"
+echo "$URI"
 echo ""
 
 # 6 ss > show config in Surge
