@@ -89,16 +89,21 @@ echo "config.json ($ss_config_path):"
 cat $ss_config_path
 echo ""
 
-# 6 ss > show config in Surge
-echo "[Proxy] in Surge"
-echo "$ss_name = ss, $ip, $ss_server_port, encrypt-method=$ss_encryption, password=$ss_password, udp-relay=true"
-echo ""
-
 # 6 ss > show config in URI
 # URI Format:
 #   ss://method:password@hostname:port
 URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64 -w 0)
 echo "${URI}#$(urlencode "$ss_name")"
+echo ""
+
+# 6 ss > show config in Surge
+echo "[Proxy] in Surge"
+echo "$ss_name = ss, $ip, $ss_server_port, encrypt-method=$ss_encryption, password=$ss_password, udp-relay=true"
+echo ""
+
+# 6 ss > show config for Clash
+echo "Clash Subscription Link:"
+echo "https://sub.id9.cc/sub?target=clash&url=$(urlencode "$URI")&insert=false&config=%E5%93%81%E4%BA%91%E4%B8%93%E5%B1%9E%E9%85%8D%E7%BD%AE&emoji=true&list=false&udp=true&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
 echo ""
 
 echo "👌"
