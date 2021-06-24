@@ -58,7 +58,6 @@ systemctl disable snap.shadowsocks-libev.ss-server-daemon.service
 sudo snap install shadowsocks-libev --edge
 
 # 3 ss > config
-sleep 5
 bash -c "cat > $ss_config_path" << EOF
 {
     "server":["0.0.0.0"],
@@ -68,19 +67,16 @@ bash -c "cat > $ss_config_path" << EOF
     "fast_open":false
 }
 EOF
-sleep 1
 echo "# 3 ss > config ($ss_config_path):"
 cat $ss_config_path
 
 # 4 set up firewall
 sudo apt install -y ufw
 yes | sudo ufw reset
-sleep 5
 sudo ufw allow ssh
 sudo ufw allow "$ss_server_port"/tcp
 sudo ufw allow "$ss_server_port"/udp
 yes | sudo ufw enable
-sleep 5
 ufw status
 
 # 5 start and turn on start on boot
@@ -105,7 +101,6 @@ URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64 -w 
 echo "${URI}#$(urlencode "$ss_name")"
 echo ""
 
-sleep 5
 echo "👌"
 echo ""
 systemctl status snap.shadowsocks-libev.ss-server-daemon.service
