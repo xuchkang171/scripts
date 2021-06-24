@@ -63,7 +63,7 @@ bash -c "cat > $ss_config_path" << EOF
 {
     "server":["0.0.0.0"],
     "server_port":$ss_server_port,
-    "encryption_method":$ss_encryption,
+    "encryption_method":"$ss_encryption",
     "password":"$ss_password",
     "fast_open":false
 }
