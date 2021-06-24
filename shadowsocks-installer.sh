@@ -43,7 +43,7 @@ ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.
 ss_server_port=$(shuf -i 1024-65535 -n 1)
 ss_password=$(openssl rand -base64 32)
 ss_encryption="chacha20-ietf-poly1305"
-ss_name="SS+UDP"
+ss_name="$(date '+%Y%m%d') SS+UDP"
 
 # 1 preparation
 sudo apt update
