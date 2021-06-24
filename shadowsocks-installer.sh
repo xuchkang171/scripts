@@ -67,8 +67,6 @@ bash -c "cat > $ss_config_path" << EOF
     "fast_open":false
 }
 EOF
-echo "# 3 ss > config ($ss_config_path):"
-cat $ss_config_path
 
 # 4 set up firewall
 sudo apt install -y ufw
