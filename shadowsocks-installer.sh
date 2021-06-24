@@ -101,7 +101,7 @@ echo ""
 # 6 ss > show config in URI
 # URI Format:
 #   ss://method:password@hostname:port
-URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64)
+URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64 -w 0)
 echo "${URI}#$(urlencode "$ss_name")"
 echo ""
 
