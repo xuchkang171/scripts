@@ -102,8 +102,7 @@ echo ""
 # URI Format:
 #   ss://method:password@hostname:port
 URI="ss://"$(echo "$ss_encryption:$ss_password@$ip:$ss_server_port" | base64)
-echo -e "${URI}#\c"
-urlencode "$ss_name" | base64
+echo "${URI}#$(urlencode "$ss_name")"
 echo ""
 
 sleep 5
