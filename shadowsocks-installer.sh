@@ -72,6 +72,7 @@ EOF
 # 4 set up firewall
 sudo apt install -y ufw
 yes | sudo ufw reset
+sleep 5
 sudo ufw allow ssh
 sudo ufw allow "$ss_server_port"/tcp
 sudo ufw allow "$ss_server_port"/udp
