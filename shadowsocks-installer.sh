@@ -1,7 +1,8 @@
 #!/bin/bash
 # Purpose: Install shadowsocks-libev and start it on boot
 # Author: Frank
-# Reference: https://gfw.report/blog/ss_tutorial/zh/
+# Reference of this ss configuration: https://gfw.report/blog/ss_tutorial/zh/
+# Source of urlencode() and urldecode(): https://gist.github.com/cdown/1163649
 # Usage: curl -O https://raw.githubusercontent.com/xuchkang171/scripts/main/shadowsocks-installer.sh && chmod +x shadowsocks-installer.sh && ./shadowsocks-installer.sh
 # --------------------------------------
 
