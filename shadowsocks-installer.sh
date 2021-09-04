@@ -44,7 +44,11 @@ ip=$(curl -4 ip.sb -s)
 ss_config_path="/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json"
 ss_server_port=$(shuf -i 1024-65535 -n 1)
 ss_password=$(openssl rand -base64 32)
+
+# "${ss_password/=/!}" - replace '=' with '!' for once
+# "${ss_password//=/!}" - replace '=' with '!' for all '='s
 ss_password="${ss_password//=/!}"
+
 ss_encryption="chacha20-ietf-poly1305"
 ss_name="$(date '+%Y%m%d') SS+UDP"
 
