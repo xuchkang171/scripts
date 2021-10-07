@@ -53,6 +53,7 @@ ss_encryption="chacha20-ietf-poly1305"
 ss_name="$(date '+%Y%m%d') SS+UDP"
 
 # 1 preparation
+apt-get install sudo
 sudo apt update
 sudo apt install -y snapd
 sudo snap install core
